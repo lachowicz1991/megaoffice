@@ -15,6 +15,7 @@ class ResourceManager:
 		print('4 : Add or remove employee hours')
 		print('5 : Save changes into the file')
 		print('6 : Load data from the file')
+		print('7 : Check employee salary')
 		print('0 : Exit program')
 
 	def controls(self):
@@ -25,7 +26,8 @@ class ResourceManager:
 			"4": self.change_hours,
 			"5": self.save_data,
 			"6": self.load_data,
-			"7": self.quit,
+			"7": self.check_salary,
+			"x": self.quit,
 		}
 
 		choice = input("Wybierz jedną opcję:\n=> ")
@@ -75,7 +77,12 @@ class ResourceManager:
 			print('Employee not found')
 
 	def check_salary(self):
-		pass
+		for e in self.employee_list:
+			print(f'Employee id:{e}')
+
+		employee_id = input("Enter employee's ID to check salary:")
+		self.employee_list[employee_id].calculate_salary()
+
 	def search_employee(self):
 		print(self.employee_list)
 		for e in self.employee_list:
