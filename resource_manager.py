@@ -39,16 +39,14 @@ class ResourceManager:
 		file_name = input('Please enter the name of the file that you would like to load:')
 		file_name_formated = f'{file_name}.json'
 		with open(file_name_formated, 'r') as f:
-			self.employee_list = json.load(f)
-			# for k, v in employee_data.items():
-			# 	key = k
-			# 	for employee in v:
-			# 		self.employee_list[key] = Employee(employee,
-			# 				 int(employee["hourly_rate"]),
-			# 				 int(employee["hours_worked"]),
-			# 				 int(employee["expected_salary"]),
-			# 				 dict(employee["personal_details"]))
-			#
+			loaded_data = json.load(f)
+			for keys, values in loaded_data.items():
+				import_user = []
+				for data in values.values():
+					import_user.append(data)
+				loaded_employee = Employee(import_user[0], import_user[1], import_user[2], import_user[3],
+										   import_user[4])
+				self.employee_list[keys] = loaded_employee
 
 
 	def save_data(self):
