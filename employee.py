@@ -9,6 +9,7 @@ class Employee:
 	expected_salary: float = 0
 	personal_details: dict = field(default_factory=list)
 
+
 	def remove_hours(self, remove):
 		self.hours_worked = self.hours_worked - remove
 		return self.hours_worked

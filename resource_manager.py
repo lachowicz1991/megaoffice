@@ -1,7 +1,8 @@
 from dataclasses import dataclass, field
 from employee import Employee
 import json
-
+import re
+# from custom_exception import Input_Exception
 
 @dataclass()
 class ResourceManager:
@@ -99,9 +100,41 @@ class ResourceManager:
 	def add_employee(self):
 		try:
 			name = input("Please enter employee's first name:")
+			check = r"^(?=.{1,40}$)[a-zA-Z]+(?:[-'\s][a-zA-Z]+)*$"
+			if re.match(check, name):
+				pass
+			else:
+				print('Wrong format or incorrect input, try again!')
+				raise ValueError
 			surname = input("Please enter employee's second name:")
-			number = input("Please enter employee's contact number:")
-			personal_details = {'Name': name, 'Surname': surname, 'Number': number}
+			check = r"^(?=.{1,40}$)[a-zA-Z]+(?:[-'\s][a-zA-Z]+)*$"
+			if re.match(check, surname):
+				pass
+			else:
+				print('Wrong format or incorrect input, try again!')
+				raise ValueError
+			number = input("Please enter employee's contact number(xxx-xxx-xxxx):")
+			check = r'\w{3}-\w{3}-\w{4}'
+			if re.match(check, number):
+				pass
+			else:
+				print('Wrong format or incorrect input, try again!')
+				raise ValueError
+			email = input("Please enter employee's email:")
+			check = r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b'
+			if re.fullmatch(check, email):
+				pass
+			else:
+				print('Wrong format or incorrect input, try again!')
+				raise ValueError
+			dob = input("Please enter date of birth(dd-mm-yyyy):")
+			check = r'^(0[1-9]|[12][0-9]|3[01])[- /.](0[1-9]|1[012])[- /.](19|20)\d\d$'
+			if re.fullmatch(check, dob):
+				pass
+			else:
+				print('Wrong format or incorrect input, try again!')
+				raise ValueError
+			personal_details = {'Name': name, 'Surname': surname, 'Number': number, 'Email': email, 'Date of birth': dob}
 			contracted_hours = float(input('Set monthly contracted hours for the employee:'))
 			hourly_rate = float(input('Please set the rate for the employee ($):'))
 			employee_data = Employee(contracted_hours, hourly_rate, personal_details=personal_details)
